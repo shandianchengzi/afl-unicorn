@@ -1,0 +1,13 @@
+credit to: https://blog.csdn.net/newnewman80/article/details/90175033
+--- qemu-2.10.0/configure	2017-08-30 12:50:40.000000000 -0400
++++ qemu-2.10.0.modded/configure	2021-10-06 23:44:00.767784931 -0400
+@@ -3855,7 +3855,8 @@
+ # check if memfd is supported
+ memfd=no
+ cat > $TMPC << EOF
+-#include <sys/memfd.h>
++//#include <sys/memfd.h>
++#include <sys/mman.h>
+ 
+ int main(void)
+ {

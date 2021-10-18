@@ -1,0 +1,17 @@
+credit to: https://blog.csdn.net/newnewman80/article/details/90175033
+--- qemu-2.10.0/util/memfd.c	2017-08-30 12:50:41.000000000 -0400
++++ qemu-2.10.0.modded/util/memfd.c	2021-10-06 23:44:33.551784756 -0400
+@@ -31,9 +31,10 @@
+ 
+ #include "qemu/memfd.h"
+ 
+-#ifdef CONFIG_MEMFD
+-#include <sys/memfd.h>
+-#elif defined CONFIG_LINUX
++//#ifdef CONFIG_MEMFD
++//#include <sys/memfd.h>
++//#elif defined CONFIG_LINUX
++#if defined CONFIG_LINUX && !defined CONFIG_MEMFD
+ #include <sys/syscall.h>
+ #include <asm/unistd.h>
+ 
