@@ -119,7 +119,7 @@ fi
 
 echo "[*] Downloading Unicorn from github..."
 rm -r "unicorn"
-git clone "$UNICORN_URL" || exit 1
+git clone "$UNICORN_URL" --branch v1 || exit 1
 
 echo "[*] Applying patches..."
 
