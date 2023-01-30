@@ -91,7 +91,7 @@ for i in wget python automake autoconf sha384sum; do
 
 done
 
-if ! which easy_install > /dev/null; then
+if ! python -c "import sys; import setuptools; print(setuptools.version.__version__)" &> /dev/null; then
 
   echo "[-] Error: Python setup-tools not found. Run 'sudo apt-get install python-setuptools'."
   exit 1
