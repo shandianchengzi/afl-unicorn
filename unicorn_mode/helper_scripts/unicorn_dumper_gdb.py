@@ -87,8 +87,8 @@ def dump_arch_info():
 
 def dump_regs():
     reg_state = {}
-    for reg in current_arch.all_registers:
-        reg_val = get_register(reg)
+    for reg in gef.arch.all_registers:
+        reg_val = gef.arch.register(reg)
         reg_state[reg.strip().strip('$')] = reg_val
 
     return reg_state
@@ -118,7 +118,7 @@ def dump_process_memory(output_dir):
         if entry.is_readable() and not '(deleted)' in entry.path:
             try:
                 # Compress and dump the content to a file
-                seg_content = read_memory(entry.page_start, entry.size)
+                seg_content = gdb.selected_inferior().read_memory(entry.page_start, entry.size)
                 if(seg_content == None):
                     print("Segment empty: @0x{0:016x} (size:UNKNOWN) {1}".format(entry.page_start, entry.path))
                 else:
@@ -132,8 +132,9 @@ def dump_process_memory(output_dir):
                     out_file.write(compressed_seg_content)
                     out_file.close()
 
-            except:
+            except Exception as e:
                 print("Exception reading segment ({}): {}".format(entry.path, sys.exc_info()[0]))
+                print(e)
         else:
             print("Skipping segment {0}@0x{1:016x}".format(entry.path, entry.page_start))
 
