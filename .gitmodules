@@ -1,0 +1,3 @@
+[submodule "unicorn_mode"]
+	path = unicorn_mode
+	url = https://github.com/shandianchengzi/unicorn_mode.git
