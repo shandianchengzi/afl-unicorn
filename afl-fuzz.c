@@ -6818,6 +6818,11 @@ EXP_ST void check_binary(u8* fname) {
 
   ACTF("Validating target binary...");
 
+  // just refer to the afl-fuzz-init.c of AFLplusplus, don't check.
+  if (unicorn_mode){  
+    return;
+  }
+
   if (strchr(fname, '/') || !(env_path = getenv("PATH"))) {
 
     target_path = ck_strdup(fname);
